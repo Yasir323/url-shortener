@@ -33,11 +33,10 @@ func InitializeStore() *StorageService {
 		DB:       0,
 	})
 
-	pong, err := redisClient.Ping(ctx).Result()
-	if err != nil {
+	if _, err := redisClient.Ping(ctx).Result(); err != nil {
 		panic(fmt.Sprintf("Error init Redis: %v", err))
 	}
-	fmt.Printf("\nRedis started successfully: pong message = {%s}", pong)
+	fmt.Printf("\nRedis started successfully")
 	storeService.redisClient = redisClient
 	return storeService
 }
